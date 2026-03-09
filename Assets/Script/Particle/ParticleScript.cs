@@ -6,12 +6,17 @@ using UnityEngine;
 
 public class ParticleScript : MonoBehaviour
 {
+    // 미리 본인의 GameObject들을 캐싱
     private GameObject self;
+    // 생존 시간
     private float LifeTime;
+    // 해당 파티클이 어떤 파티클인지 구별하기 위한 Id
     private int particleId;
 
+    // Return 함수를 실행시키기 위해 함수 저장.(Manager를 참조하지 않기 위해 함수 바인딩)
     private Action<GameObject, int> callback;
 
+    // 현재 Particle의 Component들을 저장할 리스트.(성능을 위해 컴포넌트 미리 캐싱)
     public List<IParticleComponent> particleComponents;
 
     public void Init()
@@ -38,6 +43,7 @@ public class ParticleScript : MonoBehaviour
         }
         else
         {
+            // 현재 화면에서 랜덤한 위치로 Position 지정
             self.transform.position = Camera.main.ViewportToWorldPoint(new Vector3(UnityEngine.Random.value, UnityEngine.Random.value, 10f));
         }
 
@@ -47,6 +53,7 @@ public class ParticleScript : MonoBehaviour
         callback = returnObject;
     }
 
+    // LifeTime이 끝나면 Particle 회수
     private void Update()
     {
         LifeTime -= Time.deltaTime;
@@ -54,6 +61,7 @@ public class ParticleScript : MonoBehaviour
             callback(self, particleId);
     }
 
+    // Particle이 ObjectPool에 없어서 추가할 시 컴포넌트들을 초기화 시켜주는 함수
     public void Reset()
     {
         particleComponents = new List<IParticleComponent>();
@@ -68,6 +76,7 @@ public class ParticleScript : MonoBehaviour
     }
 }
 
+// Particle들이 가질 컴포넌트들이 상속 받을 interface
 public interface IParticleComponent
 {
     public void Reset();
