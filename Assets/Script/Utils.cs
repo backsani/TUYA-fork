@@ -1,3 +1,4 @@
+using UnityEngine;
 
 [System.Serializable]
 public struct Pair<T1, T2>
@@ -12,3 +13,9 @@ public struct Pair<T1, T2>
     }
 
 }
+
+public static class Utils
+{
+    
+}
+

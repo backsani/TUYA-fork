@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd5ba12096774094e88fadf38ecaec1b, type: 3}
   m_Name: dust
   m_EditorClassIdentifier: 
-  random: 0
+  random: 1
   position: {x: 0, y: 0, z: 0}
   image: {fileID: -2413806693520163455, guid: ebe73ca9363db456bacf42c025bb4847, type: 3}
   createCycle: 1
