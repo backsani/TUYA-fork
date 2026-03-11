@@ -36,6 +36,8 @@ public class ParticleScriptable : ScriptableObject
     public bool random;
     [Tooltip("생성 위치(targetObject가 있다면 target 기준으로 position 위치에 생성)")]
     public Vector3 position;
+    [Tooltip("Particle 기본 크기 설정")]
+    public float scale = 1;
     
     [Header("Spawn")]
     [Tooltip("생성할 Particle 이미지")]
