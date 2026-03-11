@@ -19,9 +19,12 @@ public class ParticleScript : MonoBehaviour
     // 현재 Particle의 Component들을 저장할 리스트.(성능을 위해 컴포넌트 미리 캐싱)
     public List<IParticleComponent> particleComponents;
 
+    public Vector3 basicScale;
+
     public void Init()
     {
         particleComponents = new List<IParticleComponent>();
+        basicScale = transform.localScale;
     }
 
     public void Init(GameObject self, GameObject parent, ParticleScriptable scriptable, Action<GameObject, int> returnObject, int particleId)
@@ -51,6 +54,7 @@ public class ParticleScript : MonoBehaviour
         this.particleId = particleId;
 
         callback = returnObject;
+        self.transform.localScale = basicScale * scriptable.scale;
     }
 
     // LifeTime이 끝나면 Particle 회수

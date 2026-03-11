@@ -21,7 +21,7 @@ public class PlayerController : MonoBehaviour
     public float dashPower;
     [SerializeField] private float attackCoolTime;
     public float attackTimer;
-
+    
     // 플레이어의 상태들
     public PlayerState currentState;
     public PlayerIdleState idleState;
@@ -68,7 +68,8 @@ public class PlayerController : MonoBehaviour
         currentState = idleState;
 
         Camera.main.transform.SetParent(transform);
-        //Camera.main.transform.localPosition = new Vector3(0, 10.6f, -10);
+        
+        Camera.main.transform.localPosition = new Vector3(0, Camera.main.transform.localPosition.y, -10);
     }
 
     // 매 프레임 로직을 체크해 상태 변환

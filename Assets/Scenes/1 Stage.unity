@@ -259,32 +259,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stonePillarImage: {fileID: 21300000, guid: afaf3777c251dea46842e1b4dc9580c4, type: 3}
   windMill: {fileID: 28035945842200773, guid: 2b94652e0eb8a7d4991317109cf1517d, type: 3}
+  maxStep: 4
+  minStep: 0
+  stepHeight: 5
+  moveDuration: 3
   pillars:
-  - position: {x: 60, y: 7, z: 0}
-    windMillPosition: {x: 0, y: 3, z: 0}
-    moveDirection: 0
-    maxHight: 0
+  - position: 55
+    startStep: 1
+    moveDirection: 1
+    windMillPosition: {x: 0, y: 2, z: 0}
     connection:
     - index: 1
-    - index: 1
-  - position: {x: 50, y: 7, z: 0}
+  - position: 75
+    startStep: 0
+    moveDirection: -1
     windMillPosition: {x: 0, y: 3, z: 0}
-    moveDirection: 0
-    maxHight: 0
+    connection:
+    - index: 2
+    - index: 0
+  - position: 65
+    startStep: 2
+    moveDirection: -1
+    windMillPosition: {x: 0, y: 3, z: 0}
     connection:
     - index: 0
-  - position: {x: 70, y: 7, z: 0}
-    windMillPosition: {x: 0, y: 3, z: 0}
-    moveDirection: 0
-    maxHight: 0
-    connection:
-    - index: 0
-  - position: {x: 70, y: 7, z: 0}
-    windMillPosition: {x: 0, y: 3, z: 0}
-    moveDirection: 0
-    maxHight: 0
-    connection:
-    - index: 0
+  stonePillarObject: []
 --- !u!4 &195252544
 Transform:
   m_ObjectHideFlags: 0
@@ -974,8 +973,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e9cf891ac98b24ea23646dbb3038b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  targetObject: []
-  particles: []
+  targetObject:
+  - {fileID: 0}
+  - {fileID: 1372822285}
+  particles:
+  - {fileID: 11400000, guid: a18dae140ce86474fb8d259b51564828, type: 2}
+  - {fileID: 11400000, guid: 3025f08412587a64d8ae26d474dd33f2, type: 2}
 --- !u!4 &1317452076
 Transform:
   m_ObjectHideFlags: 0

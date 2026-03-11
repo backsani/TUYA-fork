@@ -46,7 +46,14 @@ public class PlayerIdleState : PlayerState
 
     public override void LogicUpdate()
     {
-        if(InputData.moveAxis.x != 0)
+        if (controller.ChangeDirection(InputData.moveAxis.x))
+        {
+            Debug.Log("Turn");
+            controller.animator.SetTrigger("IsTurn");
+            return;
+        }
+
+        if (InputData.moveAxis.x != 0)
         {
             controller.OnMove();
         }
@@ -93,8 +100,9 @@ public class PlayerMoveState : PlayerState
     public override void LogicUpdate()
     {
         // 멈추었는지 체크
-        if(InputData.moveAxis.x == 0)
+        if(Mathf.Abs(InputData.moveAxis.x) == 0 && Mathf.Abs(controller.Rigidbody2D.velocity.x) < 0.01f)
         {
+            Debug.Log("오류 발생");
             controller.OnIdle();
         }
 
@@ -115,15 +123,25 @@ public class PlayerMoveState : PlayerState
     public override void PhysicsUpdate()
     {
         float moveDirect = InputData.moveAxis.x;
+        Vector2 velocity;
 
-        if(controller.ChangeDirection(moveDirect))
+        if (moveDirect == 0)
         {
-            Debug.Log("Turn");
-            controller.animator.SetTrigger("IsTurn");
+            velocity.x = Mathf.MoveTowards(controller.Rigidbody2D.velocity.x, 0f, 2000.0f * Time.deltaTime);
+            return;
         }
+        else
+        {
+            velocity = controller.Rigidbody2D.velocity;
+            velocity.x = moveDirect * moveSpeed;
 
-        Vector2 velocity = controller.Rigidbody2D.velocity;
-        velocity.x = moveDirect * moveSpeed;
+            if (controller.ChangeDirection(moveDirect))
+            {
+                Debug.Log("Turn");
+                controller.animator.SetTrigger("IsTurn");
+            }
+        }
+        
         controller.Rigidbody2D.velocity = velocity;
     }
 }
